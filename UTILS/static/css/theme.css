@@ -1,0 +1,287 @@
+/* 
+ * Theme Stylesheet
+ * Contains light and dark theme color variables and theme-specific styles
+ */
+
+/* Light Theme (Default) */
+:root {
+    --color-bg-primary: #ffffff;
+    --color-bg-secondary: #f8f9fa;
+    --color-bg-tertiary: #f1f3f5;
+    --color-text-primary: #212529;
+    --color-text-secondary: #495057;
+    --color-text-tertiary: #6c757d;
+    --color-border: #dee2e6;
+    --color-accent: #4361ee;
+    --color-accent-light: #4895ef;
+    --color-success: #28a745;
+    --color-danger: #dc3545;
+    --color-warning: #ffc107;
+    --color-info: #17a2b8;
+}
+
+/* Dark Theme */
+.dark-theme {
+    --color-bg-primary: #121212;
+    --color-bg-secondary: #1e1e1e;
+    --color-bg-tertiary: #2d2d2d;
+    --color-text-primary: #e9e9e9;
+    --color-text-secondary: #c4c4c4;
+    --color-text-tertiary: #a0a0a0;
+    --color-border: #3a3a3a;
+    --color-accent: #4361ee;
+    --color-accent-light: #4895ef;
+    --color-success: #28a745;
+    --color-danger: #dc3545;
+    --color-warning: #ffc107;
+    --color-info: #17a2b8;
+}
+
+/* Base Elements Theme */
+body {
+    background-color: var(--color-bg-primary);
+    color: var(--color-text-primary);
+}
+
+a {
+    color: var(--color-accent);
+}
+
+a:hover {
+    color: var(--color-accent-light);
+}
+
+header {
+    background-color: var(--color-bg-primary);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.nav-links a {
+    color: var(--color-text-primary);
+}
+
+.nav-links a:hover, .nav-links a.active {
+    color: var(--color-accent);
+}
+
+footer {
+    background-color: var(--color-bg-secondary);
+    color: var(--color-text-secondary);
+}
+
+.footer-section h3 {
+    color: var(--color-text-primary);
+}
+
+.footer-section a {
+    color: var(--color-text-secondary);
+}
+
+.footer-section a:hover {
+    color: var(--color-accent);
+}
+
+.footer-bottom {
+    border-top-color: var(--color-border);
+}
+
+/* Buttons Theme */
+.btn {
+    background-color: var(--color-accent);
+    color: white;
+}
+
+.action-btn:hover {
+    background-color: var(--color-bg-tertiary);
+}
+
+/* Theme Toggle Button */
+#theme-toggle {
+    color: var(--color-text-primary);
+}
+
+#theme-toggle:hover {
+    background-color: var(--color-bg-tertiary);
+}
+
+.dark-theme .fa-sun, .fa-moon {
+    display: none;
+}
+
+.dark-theme .fa-moon, .fa-sun {
+    display: inline-block;
+}
+
+/* Hero Section Theme */
+.hero {
+    background-color: var(--color-bg-secondary);
+}
+
+/* Features Section Theme */
+.feature-card {
+    background-color: var(--color-bg-primary);
+}
+
+.feature-card i {
+    color: var(--color-accent);
+}
+
+/* CTA Section Theme */
+.cta {
+    background-color: var(--color-bg-secondary);
+}
+
+/* Page Header Theme */
+.page-header {
+    background-color: var(--color-bg-secondary);
+}
+
+/* About Page Theme */
+.image-placeholder {
+    background-color: var(--color-bg-tertiary);
+}
+
+.image-placeholder i {
+    color: var(--color-text-tertiary);
+}
+
+.team-member, .value-card {
+    background-color: var(--color-bg-primary);
+}
+
+.member-image {
+    background-color: var(--color-bg-tertiary);
+    color: var(--color-text-tertiary);
+}
+
+/* Services Page Theme */
+.service-card {
+    background-color: var(--color-bg-primary);
+}
+
+.service-icon {
+    color: var(--color-accent);
+}
+
+.pricing-card {
+    background-color: var(--color-bg-primary);
+}
+
+/* Document Management Page Theme */
+.search-bar input, .search-bar button {
+    background-color: var(--color-bg-primary);
+    color: var(--color-text-primary);
+    border-color: var(--color-border);
+}
+
+.document-actions select {
+    background-color: var(--color-bg-primary);
+    color: var(--color-text-primary);
+    border-color: var(--color-border);
+}
+
+.folder-nav {
+    background-color: var(--color-bg-primary);
+}
+
+.folder-nav ul li a:hover {
+    background-color: var(--color-bg-tertiary);
+}
+
+.folder-nav ul li a.active {
+    background-color: var(--color-bg-tertiary);
+    color: var(--color-accent);
+}
+
+.document-item {
+    background-color: var(--color-bg-primary);
+}
+
+.document-item i.fa-folder {
+    color: var(--color-warning);
+}
+
+.document-item i.fa-file-pdf {
+    color: var(--color-danger);
+}
+
+.document-item i.fa-file-word {
+    color: var(--color-info);
+}
+
+.document-item i.fa-file-excel {
+    color: var(--color-success);
+}
+
+.document-item i.fa-file-powerpoint {
+    color: var(--color-accent-light);
+}
+
+/* Modal Theme */
+.modal-content {
+    background-color: var(--color-bg-primary);
+    color: var(--color-text-primary);
+}
+
+.form-group input, .form-group select {
+    background-color: var(--color-bg-primary);
+    color: var(--color-text-primary);
+    border-color: var(--color-border);
+}
+
+/* Chat Page Theme */
+.chat-sidebar {
+    border-right-color: var(--color-border);
+}
+
+.user-profile, .chat-search {
+    border-bottom-color: var(--color-border);
+}
+
+.chat-search input {
+    background-color: var(--color-bg-primary);
+    color: var(--color-text-primary);
+    border-color: var(--color-border);
+}
+
+.chat-item:hover, .chat-item.active {
+    background-color: var(--color-bg-tertiary);
+}
+
+.chat-badge {
+    background-color: var(--color-accent);
+    color: white;
+}
+
+.chat-header {
+    border-bottom-color: var(--color-border);
+}
+
+.message-date span {
+    background-color: var(--color-bg-tertiary);
+    color: var(--color-text-tertiary);
+}
+
+.message.received .message-text {
+    background-color: var(--color-bg-tertiary);
+    color: var(--color-text-primary);
+}
+
+.message.sent .message-text {
+    background-color: var(--color-accent);
+    color: white;
+}
+
+.chat-input {
+    border-top-color: var(--color-border);
+}
+
+.chat-input input {
+    background-color: var(--color-bg-primary);
+    color: var(--color-text-primary);
+    border-color: var(--color-border);
+}
+
+.input-btn:hover {
+    background-color: var(--color-bg-tertiary);
+}

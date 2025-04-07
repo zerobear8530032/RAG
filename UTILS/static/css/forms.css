@@ -1,0 +1,355 @@
+/* 
+ * Forms Stylesheet
+ * Contains styles for all forms including contact, login, register, etc.
+ */
+
+/* General Form Styles */
+.form {
+  width: 100%;
+  max-width: 100%;
+}
+
+.form-group {
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+  width: 100%;
+  padding: 12px 15px;
+  border-radius: var(--border-radius);
+  border: 1px solid var(--color-border);
+  background-color: var(--color-bg-primary);
+  color: var(--color-text-primary);
+  font-size: 1rem;
+  transition: border-color var(--transition-speed), box-shadow var(--transition-speed);
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 2px rgba(67, 97, 238, 0.2);
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.form .btn {
+  display: inline-block;
+  padding: 12px 24px;
+  font-size: 1rem;
+  font-weight: 500;
+  text-align: center;
+  border-radius: var(--border-radius);
+  background-color: var(--color-accent);
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  transition: background-color var(--transition-speed);
+}
+
+.form .btn:hover {
+  background-color: var(--color-accent-light);
+}
+
+/* Validation Styles */
+.validation-message {
+ font-size: 0.85rem;
+  color: #dc3545; /* Red text */
+  background-color: #f8d7da; /* Light red/pink background */
+  padding: 6px 10px;
+  border-radius: 6px;
+  width: 100%;
+  margin-top: 5px;
+  display: inline-flex;
+}
+
+.form-group.error input,
+.form-group.error textarea,
+.form-group.error select {
+  border-color: var(--color-danger);
+}
+
+.form-group.error .validation-message {
+  display: block;
+}
+
+.form-group.success input,
+.form-group.success textarea,
+.form-group.success select {
+  border-color: var(--color-success);
+}
+
+/* Contact Form Specific Styles */
+.contact-section {
+  padding: 60px 0;
+}
+
+.contact-grid {
+  grid-template-columns: 1fr 1fr;
+  gap: 50px;
+  display: flex;
+  justify-content: center;
+}
+.form-links {
+  margin-top: 15px;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+.form-links a {
+  color: var(--color-primary);
+  text-decoration: none;
+}
+
+.form-links a:hover {
+  text-decoration: underline;
+}
+
+
+.contact-form-container {
+  background-color: var(--color-bg-primary);
+  padding: 30px;
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+}
+
+.contact-info h2,
+.contact-form-container h2 {
+  margin-bottom: 20px;
+}
+
+.contact-details {
+  margin: 30px 0;
+}
+
+.contact-item {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 20px;
+}
+
+.contact-item i {
+  font-size: 1.5rem;
+  color: var(--color-accent);
+  margin-right: 15px;
+  margin-top: 5px;
+}
+
+.contact-item h3 {
+  margin-bottom: 5px;
+  font-size: 1.2rem;
+}
+
+.contact-item p {
+  margin-bottom: 0;
+  color: var(--color-text-secondary);
+}
+
+.social-links h3 {
+  margin-bottom: 15px;
+}
+
+.social-icons {
+  display: flex;
+  gap: 15px;
+}
+
+.social-icons a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: var(--color-bg-tertiary);
+  color: var(--color-text-primary);
+  transition: background-color var(--transition-speed), color var(--transition-speed);
+}
+
+.social-icons a:hover {
+  background-color: var(--color-accent);
+  color: white;
+}
+
+/* Map Section */
+.map-section {
+  padding: 60px 0;
+  background-color: var(--color-bg-secondary);
+}
+
+.map-container {
+  margin-top: 30px;
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  height: 400px;
+}
+
+.map-placeholder {
+  background-color: var(--color-bg-tertiary);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: var(--color-text-tertiary);
+}
+
+.map-placeholder i {
+  font-size: 4rem;
+  margin-bottom: 20px;
+}
+
+/* Responsive Styles for Forms */
+@media (max-width: 992px) {
+  .contact-grid {
+      grid-template-columns: 1fr;
+      gap: 30px;
+  }
+  
+  .contact-info {
+      order: 2;
+  }
+  
+  .contact-form-container {
+      order: 1;
+  }
+}
+
+@media (max-width: 576px) {
+  .form-group label {
+      font-size: 0.9rem;
+  }
+  
+  .form-group input,
+  .form-group textarea,
+  .form-group select {
+      padding: 10px;
+  }
+  
+  .form .btn {
+      width: 100%;
+  }
+}
+
+/* Login and Registration Forms */
+.auth-section {
+  padding: 60px 0;
+  min-height: calc(100vh - 300px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+
+.auth-container {
+  width: 100%;
+  max-width: 450px;
+  background-color: var(--color-bg-primary);
+  padding: 40px;
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+}
+
+.auth-container h2 {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.auth-links {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.auth-links a {
+  color: var(--color-accent);
+  text-decoration: none;
+}
+
+.auth-links a:hover {
+  text-decoration: underline;
+}
+
+.form-divider {
+  display: flex;
+  align-items: center;
+  margin: 20px 0;
+}
+
+.form-divider::before,
+.form-divider::after {
+  content: "";
+  flex: 1;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.form-divider span {
+  padding: 0 10px;
+  color: var(--color-text-tertiary);
+  font-size: 0.9rem;
+}
+
+.social-login {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.social-login button {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 10px;
+  border-radius: var(--border-radius);
+  border: 1px solid var(--color-border);
+  background-color: var(--color-bg-primary);
+  color: var(--color-text-primary);
+  cursor: pointer;
+  transition: background-color var(--transition-speed);
+}
+
+.social-login button:hover {
+  background-color: var(--color-bg-tertiary);
+}
+
+.remember-forgot {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.checkbox-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.checkbox-group input[type="checkbox"] {
+  width: auto;
+  margin: 0;
+}
+
+.checkbox-group label {
+  margin: 0;
+  font-weight: normal;
+}
+
+.auth-section .container {
+  display: flex;
+  justify-content: center;
+}

@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Services - RAG Chat</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href='{{url_for("static",filename="css/styles.css")}}'>
+    <link rel="stylesheet" href='{{url_for("static",filename="css/theme.css")}}'>
+    <link rel="stylesheet" href='{{url_for("static",filename="css/responsive.css")}}'>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <h1>RAG Chat</h1>
+        </div>
+        <nav>
+            <button class="mobile-menu-btn" aria-label="Toggle menu">
+                <i class="fas fa-bars"></i>
+            </button>
+            <ul class="nav-links">
+                <li><a href="{{url_for('home')}}" class="active">Home</a></li>
+                <li><a href="{{url_for('about')}}">About Us</a></li>
+                <li><a href="{{url_for('service')}}">Services</a></li>
+                <li><a href="{{url_for('contact')}}">Contact</a></li>
+                {% if current_user.is_authenticated%}
+                <li><a href="{{url_for('uploadDocument')}}">Documents</a></li>
+                <li><a href="{{url_for('query')}}">Chat</a></li> 
+                <li><a href="{{url_for('logout')}}">Logout</a></li> 
+                {% else %}
+                <li><a href="{{url_for('login')}}">Login</a></li>
+                <li><a href="{{url_for('register')}}">Register</a></li> 
+                {% endif %}
+                <li>
+                    <button id="theme-toggle" aria-label="Toggle theme">
+                        <i class="fas fa-moon"></i>
+                        <i class="fas fa-sun"></i>
+                    </button>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div class="content-section">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+              {% for category, message in messages %}
+                <div class="alert alert-{{ category }}">{{ message }}</div>
+              {% endfor %}
+            {% endif %}
+            {% endwith %}
+          </div>
+      
+        <section class="page-header">
+            <div class="container">
+                <h1>Our Services</h1>
+                <p>Explore the range of services we offer</p>
+            </div>
+        </section>
+
+        <section class="services-intro">
+            <div class="container">
+                <p>At RAG Chat, we offer a comprehensive suite of services designed to meet your needs. Our team of experts is committed to delivering high-quality solutions that exceed your expectations.</p>
+            </div>
+        </section>
+
+        <section class="services-list">
+            <div class="container">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-laptop-code"></i>
+                    </div>
+                    <div class="service-content">
+                        <h2>Web Development</h2>
+                        <p>We create responsive, user-friendly websites that work seamlessly across all devices. Our development process focuses on clean code, performance, and accessibility.</p>
+                        <ul>
+                            <li>Responsive Design</li>
+                            <li>Front-end Development</li>
+                            <li>Back-end Development</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-palette"></i>
+                    </div>
+                    <div class="service-content">
+                        <h2>UI/UX Design</h2>
+                        <p>Our design team creates intuitive and visually appealing interfaces that enhance user experience. We focus on creating designs that are both beautiful and functional.</p>
+                        <ul>
+                            <li>User Interface Design</li>
+                            <li>User Experience Design</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-file-alt"></i>
+                    </div>
+                    <div class="service-content">
+                        <h2>Document Management</h2>
+                        <p>Our document management system allows you to store, organize, and access your documents with ease. We provide secure storage and efficient retrieval options.</p>
+                        <ul>
+                            <li>Document Storage</li>
+                            <li>Document Organization</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                    <div class="service-content">
+                        <h2>Communication Tools</h2>
+                        <p>Our chat system enables real-time communication between team members. Stay connected and collaborate efficiently with our user-friendly chat interface.</p>
+                        <ul>
+                            <li>Intelligent Chat. Instant Answers.</li>
+                            <li>Chat Smarter. Work Faster.</li>
+                            <li>Conversational Intelligence at Your Fingertips</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="pricing">
+            <div class="container">
+                <h2>Pricing Plans</h2>
+                <div class="pricing-grid">
+                    <div class="pricing-card">
+                        <div class="pricing-header">
+                            <h3>Basic</h3>
+                            <p class="price">$99<span>/month</span></p>
+                        </div>
+                        <div class="pricing-features">
+                            <ul>
+                                <li><i class="fas fa-check"></i> Web Development</li>
+                                <li><i class="fas fa-check"></i> 5GB Document Storage</li>
+                                <li><i class="fas fa-check"></i> Basic Chat</li>
+                                <li><i class="fas fa-times"></i> UI/UX Design</li>
+                                <li><i class="fas fa-times"></i> Priority Support</li>
+                            </ul>
+                        </div>
+                        <a href="#" class="btn">Get Started</a>
+                    </div>
+
+                    <div class="pricing-card featured">
+                        <div class="pricing-header">
+                            <h3>Pro</h3>
+                            <p class="price">$199<span>/month</span></p>
+                        </div>
+                        <div class="pricing-features">
+                            <ul>
+                                <li><i class="fas fa-check"></i> Web Development</li>
+                                <li><i class="fas fa-check"></i> 20GB Document Storage</li>
+                                <li><i class="fas fa-check"></i> Advanced Chat</li>
+                                <li><i class="fas fa-check"></i> Basic UI/UX Design</li>
+                                <li><i class="fas fa-times"></i> Priority Support</li>
+                            </ul>
+                        </div>
+                        <a href="#" class="btn">Get Started</a>
+                    </div>
+
+                    <div class="pricing-card">
+                        <div class="pricing-header">
+                            <h3>Enterprise</h3>
+                            <p class="price">$299<span>/month</span></p>
+                        </div>
+                        <div class="pricing-features">
+                            <ul>
+                                <li><i class="fas fa-check"></i> Web Development</li>
+                                <li><i class="fas fa-check"></i> 50GB Document Storage</li>
+                                <li><i class="fas fa-check"></i> Premium Chat</li>
+                                <li><i class="fas fa-check"></i> Full UI/UX Design</li>
+                                <li><i class="fas fa-check"></i> Priority Support</li>
+                            </ul>
+                        </div>
+                        <a href="#" class="btn">Get Started</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta">
+            <div class="container">
+                <h2>Ready to get started?</h2>
+                <p>Contact us today to discuss your project needs.</p>
+                <a href="#" class="btn">Contact Us</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>RAG Chat</h3>
+                    <p>A modern, responsive website with theme switching capabilities.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="{{url_for('home')}}" class="active">Home</a></li>
+                        <li><a href="{{url_for('about')}}">About Us</a></li>
+                        <li><a href="{{url_for('service')}}">Services</a></li>
+                        <li><a href="{{url_for('contact')}}">Contact</a></li>
+                        {% if current_user.is_authenticated%}
+                        <li><a href="{{url_for('uploadDocument')}}">Documents</a></li>
+                        <li><a href="{{url_for('query')}}">Chat</a></li> 
+                        <li><a href="{{url_for('logout')}}">Logout</a></li> 
+                        {% else %}
+                        <li><a href="{{url_for('login')}}">Login</a></li>
+                        <li><a href="{{url_for('register')}}">Register</a></li> 
+                        {% endif %}                       
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact</h3>
+                    <p><i class="fas fa-envelope"></i> info@myproject.com</p>
+                    <p><i class="fas fa-phone"></i> +1 (555) 123-4567</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 RAG Chat. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="{{url_for('static',filename='js/theme.js')}}"></script>
+    <script src="{{url_for('static',filename='js/main.js')}}"></script>
+    
+</body>
+</html>

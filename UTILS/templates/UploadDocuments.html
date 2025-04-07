@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document Management - RAG Chat</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href='{{url_for("static",filename="css/styles.css")}}'>
+    <link rel="stylesheet" href='{{url_for("static",filename="css/theme.css")}}'>
+    <link rel="stylesheet" href='{{url_for("static",filename="css/responsive.css")}}'>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <h1>My Document</h1>
+        </div>
+        <nav>
+            <button class="mobile-menu-btn" aria-label="Toggle menu">
+                <i class="fas fa-bars"></i>
+            </button>
+            <ul class="nav-links">
+                <li><a href="{{url_for('home')}}" class="active">Home</a></li>
+                <li><a href="{{url_for('about')}}">About Us</a></li>
+                <li><a href="{{url_for('service')}}">Services</a></li>
+                <li><a href="{{url_for('contact')}}">Contact</a></li>
+                {% if current_user.is_authenticated%}
+                <li><a href="{{url_for('uploadDocument')}}">Documents</a></li>
+                <li><a href="{{url_for('query')}}">Chat</a></li> 
+                <li><a href="{{url_for('logout')}}">Logout</a></li> 
+                {% else %}
+                <li><a href="{{url_for('login')}}">Login</a></li>
+                <li><a href="{{url_for('register')}}">Register</a></li> 
+                {% endif %}
+                <li>
+                    <button id="theme-toggle" aria-label="Toggle theme">
+                        <i class="fas fa-moon"></i>
+                        <i class="fas fa-sun"></i>
+                    </button>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="page-header">
+            <div class="container">
+                <h1>Document Management</h1>
+                <p>Organize and access your documents with ease</p>
+            </div>
+        </section>
+
+        <section class="document-dashboard">
+            <div class="content-section">
+                {% with messages=get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">
+                        <span class="alert-message">{{ message }}</span>
+                        <button class="alert-close" onclick="this.parentElement.remove()">&times;</button>
+                    </div>                    
+                    {% endfor %}
+                {% endif %}
+                {% endwith %}
+            </div>
+        </section>
+
+        
+
+            <script>
+                setTimeout(() => {
+                  document.querySelectorAll('.alert').forEach(el => {
+                    el.style.opacity = '0';
+                    el.style.transform = 'translateY(-10px)';
+                    setTimeout(() => el.remove(), 500);
+                  });
+                }, 5000); // disappears after 5 seconds
+              </script>
+              
+          
+            <div class="container">
+                <div class="storage-bar">
+                    <div class="bar-label">
+                        Storage Used: {{ (used_storage / (1024*1024)) | round(2) }} MB / 100 MB
+                    </div>
+                    <div class="progress">
+                        <div class="progress-fill" style="width: {{ used_percentage }}%;"></div>
+                    </div>
+                </div>
+                
+                <div class="document-controls">
+                    <div class="search-bar">
+                        <input type="text" id="document-search" placeholder="Search documents...">
+                        <button id="search-btn"><i class="fas fa-search"></i></button>
+                    </div>
+                    <div class="document-actions">
+                        <button id="upload-btn" class="btn"><i class="fas fa-upload"></i> Upload</button>
+                    </div>
+                </div>
+
+                <div class="document-content">
+                    <div class="folder-nav">
+                        <ul>
+                            <li><a href="#" class="active"><i class="fas fa-folder"></i> All Documents</a></li>
+                        </ul>
+                    </div>
+                    
+                    {%  if filenames  %}
+                    {%  for file in filenames %}
+                    
+                    <div class="document-list">
+                        <div class="document-item folder">
+                            <i class="fas fa-file-alt"></i>
+                            <div class="document-details">
+                                <h3>{{file}}</h3>
+                                <p>Last modified: Yesterday</p>
+                            </div>
+                            <div class="document-actions">
+                                <button class="action-btn" aria-label="More options"><i class="fas fa-ellipsis-v"></i></button>
+                            </div>
+                        </div>
+                        {%  endfor %}
+                        {% else %}
+                        <h1>No Documents Avaible Right Now</h1> 
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </section>
+        <div id="upload-modal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2>Upload Document</h2>
+
+                {% if form %}
+                    <form id="upload-form" method="POST" enctype="multipart/form-data">
+                        {{ form.hidden_tag() }}
+                        
+                        <div class="form-group">                        
+                            <label for="file-upload">{{ form.document.label.text }}</label>
+                            {{ form.document(id="file-upload") }}      
+                        </div>
+                        <script>
+                            const fileInput = document.getElementById('file-upload');
+                        console.log(fileInput); // Add this to debug
+                        console.log(fileInput?.value); // Safe check
+                        
+                        </script>
+                        
+                        {{ form.submit(class="btn") }}
+                    </form>
+                    {% endif %}
+            </div>
+        </div>
+
+        <div id="folder-modal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2>Create New Folder</h2>
+                <form id="folder-form">
+                    <div class="form-group">
+                        <label for="folder-name">Folder Name</label>
+                        <input type="text" id="folder-name" name="folder-name" placeholder="Enter folder name">
+                    </div>
+                    <div class="form-group">
+                        <label for="parent-folder">Parent Folder</label>
+                        <select id="parent-folder" name="parent-folder">
+                            <option value="root">Root</option>
+                            <option value="projects">Projects</option>
+                            <option value="reports">Reports</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn">Create Folder</button>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>My Documents</h3>
+                    <p>A modern, responsive website with theme switching capabilities.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="{{url_for('home')}}" class="active">Home</a></li>
+                        <li><a href="{{url_for('about')}}">About Us</a></li>
+                        <li><a href="{{url_for('service')}}">Services</a></li>
+                        <li><a href="{{url_for('contact')}}">Contact</a></li>
+                        {% if current_user.is_authenticated%}
+                        <li><a href="{{url_for('uploadDocument')}}">Documents</a></li>
+                        <li><a href="{{url_for('query')}}">Chat</a></li> 
+                        <li><a href="{{url_for('logout')}}">Logout</a></li> 
+                        {% else %}
+                        <li><a href="{{url_for('login')}}">Login</a></li>
+                        <li><a href="{{url_for('register')}}">Register</a></li> 
+                        {% endif %}                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact</h3>
+                    <p><i class="fas fa-envelope"></i> info@myproject.com</p>
+                    <p><i class="fas fa-phone"></i> +1 (555) 123-4567</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 RAG Chat. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="{{url_for('static',filename='js/theme.js')}}"></script>
+    <script src="{{url_for('static',filename='js/main.js')}}"></script>
+    <script src="{{url_for('static',filename='js/documents.js')}}"></script>
+
+</body>
+</html>

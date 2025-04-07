@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - RAG Chat</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/styles.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/theme.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/responsive.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/forms.css')}}">
+
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <h1>RAG Chat</h1>
+        </div>
+        <nav>
+            <button class="mobile-menu-btn" aria-label="Toggle menu">
+                <i class="fas fa-bars"></i>
+            </button>
+            <ul class="nav-links">
+                <li><a href="{{url_for('home')}}">Home</a></li>
+                <li><a href="{{url_for('about')}}">About Us</a></li>
+                <li><a href="{{url_for('service')}}">Services</a></li>
+                <li><a href="{{url_for('contact')}}">Contact</a></li>
+                {% if current_user.is_authenticated %}
+                <li><a href="{{url_for('uploadDocument')}}">Documents</a></li>
+                <li><a href="{{url_for('query')}}">Chat</a></li>
+                <li><a href="{{url_for('logout')}}">Logout</a></li>
+                {% else %}
+                <li><a href="{{url_for('login')}}" class="active">Login</a></li>
+                <li><a href="{{url_for('register')}}">Register</a></li>
+                {% endif %}
+                <li>
+                    <button id="theme-toggle" aria-label="Toggle theme">
+                        <i class="fas fa-moon"></i>
+                        <i class="fas fa-sun"></i>
+                    </button>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="page-header">
+            <div class="container">
+                <h1>Login</h1>
+                <p>Access your RAG Chat account</p>
+            </div>
+        </section>
+
+        <div class="content-section">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+            {% endwith %}
+        </div>
+
+        <section class="contact-section">
+            <div class="container">
+                <div class="contact-grid">
+                    <div class="contact-form-container">
+                        <h2>Login to Continue</h2>
+                        <form method="POST" class="form" action="{{ url_for('login') }}">
+                            {{ form.hidden_tag() }}
+
+                            <div class="form-group">
+                                {% if form.email.errors %}
+                                    {{ form.email.label }}
+                                    {{ form.email(id="email", placeholder="Enter your email") }}
+                                    {% for error in form.email.errors %}
+                                        <span class="validation-message">{{ error }}</span>
+                                    {% endfor %}
+                                {% else %}
+                                    {{ form.email.label }}
+                                    {{ form.email(id="email", placeholder="Enter your email") }}
+                                {% endif %}
+                            </div>
+
+                            <div class="form-group">
+                                {% if form.password.errors %}
+                                    {{ form.password.label }}
+                                    {{ form.password(id="password", placeholder="Enter your password") }}
+                                    {% for error in form.password.errors %}
+                                        <span class="validation-message">{{ error }}</span>
+                                    {% endfor %}
+                                {% else %}
+                                    {{ form.password.label }}
+                                    {{ form.password(id="password", placeholder="Enter your password") }}
+                                {% endif %}
+                            </div>
+
+                            <div class="form-group">
+                                {{ form.submit(class="btn") }}
+                            </div>
+                        </form>
+                        <div class="form-links">
+                          <p>Don't have an account? <a href="{{ url_for('register') }}">Register here</a></p>
+                          <p><a href="{{ url_for('reset_request') }}">Forgot your password?</a></p>
+                      </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>My Project</h3>
+                    <p>A modern, responsive website with theme switching capabilities.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="{{url_for('home')}}">Home</a></li>
+                        <li><a href="{{url_for('about')}}">About Us</a></li>
+                        <li><a href="{{url_for('service')}}">Services</a></li>
+                        <li><a href="{{url_for('contact')}}">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact</h3>
+                    <p><i class="fas fa-envelope"></i> info@myproject.com</p>
+                    <p><i class="fas fa-phone"></i> +1 (555) 123-4567</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 My Project. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    <script>
+      setTimeout(() => {
+        document.querySelectorAll('.alert').forEach(el => {
+          el.style.opacity = '0';
+          el.style.transform = 'translateY(-10px)';
+          setTimeout(() => el.remove(), 500);
+        });
+      }, 5000); // disappears after 5 seconds
+    </script>
+  
+
+    <script src="{{url_for('static', filename='js/theme.js')}}"></script>
+    <script src="{{url_for('static', filename='js/main.js')}}"></script>
+</body>
+</html>

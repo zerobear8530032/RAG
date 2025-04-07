@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - RAG Chat</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href='{{url_for("static",filename="css/styles.css")}}'>
+    <link rel="stylesheet" href='{{url_for("static",filename="css/theme.css")}}'>
+    <link rel="stylesheet" href='{{url_for("static",filename="css/responsive.css")}}'>
+
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <h1>RAG Chat</h1>
+        </div>
+        <nav>
+            <button class="mobile-menu-btn" aria-label="Toggle menu">
+                <i class="fas fa-bars"></i>
+            </button>
+            <ul class="nav-links">
+                <li><a href="{{url_for('home')}}" class="active">Home</a></li>
+                <li><a href="{{url_for('about')}}">About Us</a></li>
+                <li><a href="{{url_for('service')}}">Services</a></li>
+                <li><a href="{{url_for('contact')}}">Contact</a></li>
+                {% if current_user.is_authenticated%}
+                <li><a href="{{url_for('uploadDocument')}}">Documents</a></li>
+                <li><a href="{{url_for('query')}}">Chat</a></li> 
+                <li><a href="{{url_for('logout')}}">Logout</a></li> 
+                {% else %}
+                <li><a href="{{url_for('login')}}">Login</a></li>
+                <li><a href="{{url_for('register')}}">Register</a></li> 
+                {% endif %}               
+                <li>
+                    <button id="theme-toggle" aria-label="Toggle theme">
+                        <i class="fas fa-moon"></i>
+                        <i class="fas fa-sun"></i>
+                    </button>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="page-header">
+            <div class="container">
+                <h1>About Us</h1>
+                <p>Learn more about our team and mission</p>
+            </div>
+        </section>
+
+        <section class="about-content">
+            <div class="container">
+                <div class="about-grid">
+                    <div class="about-text">
+                        <h2>Our Story</h2>
+                        <p>Founded in 2020, RAG Chat was created with a vision to provide intuitive and responsive web experiences. We believe in creating user-friendly interfaces that adapt to user preferences.</p>
+                        <p>Our team of dedicated professionals works tirelessly to ensure that we deliver the best possible experience to our users. We focus on clean design, intuitive navigation, and cutting-edge technology.</p>
+                        <h2>Our Mission</h2>
+                        <p>At RAG Chat, our mission is to create websites that are accessible, easy to use, and visually appealing. We believe that every user deserves a great experience, regardless of their device or preferences.</p>
+                    </div>
+                    <div class="about-image">
+                        <div class="image-placeholder">
+                            <i class="fas fa-users"></i>
+                            <p>Our Team</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="team">
+            <div class="container">
+                <h2>Meet Our Team</h2>
+                <div class="team-grid">
+                    <div class="team-member">
+                        <div class="member-image">
+                            <i class="fas fa-user-circle"></i>
+                        </div>
+                        <h3>Abdul Saboor</h3>
+                        <p>Team Leader</p>
+                    </div>
+                    <div class="team-member">
+                        <div class="member-image">
+                            <i class="fas fa-user-circle"></i>
+                        </div>
+                        <h3>Anurag</h3>
+                        <p>Integration</p>
+                    </div>
+                    <div class="team-member">
+                        <div class="member-image">
+                            <i class="fas fa-user-circle"></i>
+                        </div>
+                        <h3>Jyto Kalambe</h3>
+                        <p>Front End</p>
+                    </div>
+                    <div class="team-member">
+                        <div class="member-image">
+                            <i class="fas fa-user-circle"></i>
+                        </div>
+                        <h3>Nikita Rajput</h3>
+                        <p>Analysis</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="values">
+            <div class="container">
+                <h2>Our Values</h2>
+                <div class="values-grid">
+                    <div class="value-card">
+                        <i class="fas fa-check-circle"></i>
+                        <h3>Quality</h3>
+                        <p>We strive for excellence in everything we do.</p>
+                    </div>
+                    <div class="value-card">
+                        <i class="fas fa-users"></i>
+                        <h3>Collaboration</h3>
+                        <p>We believe in the power of teamwork and open communication.</p>
+                    </div>
+                    <div class="value-card">
+                        <i class="fas fa-lightbulb"></i>
+                        <h3>Innovation</h3>
+                        <p>We constantly seek new and better ways to solve problems.</p>
+                    </div>
+                    <div class="value-card">
+                        <i class="fas fa-heart"></i>
+                        <h3>Passion</h3>
+                        <p>We are passionate about creating exceptional user experiences.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>RAG Chat</h3>
+                    <p>A modern, responsive website with theme switching capabilities.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="{{url_for('home')}}" class="active">Home</a></li>
+                        <li><a href="{{url_for('about')}}">About Us</a></li>
+                        <li><a href="{{url_for('service')}}">Services</a></li>
+                        <li><a href="{{url_for('contact')}}">Contact</a></li>
+                        {% if current_user.is_authenticated%}
+                        <li><a href="{{url_for('uploadDocument')}}">Documents</a></li>
+                        <li><a href="{{url_for('query')}}">Chat</a></li> 
+                        <li><a href="{{url_for('logout')}}">Logout</a></li> 
+                        {% else %}
+                        <li><a href="{{url_for('login')}}">Login</a></li>
+                        <li><a href="{{url_for('register')}}">Register</a></li> 
+                        {% endif %}               
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact</h3>
+                    <p><i class="fas fa-envelope"></i> info@myproject.com</p>
+                    <p><i class="fas fa-phone"></i> +1 (555) 123-4567</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 RAG Chat. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    <script src="{{url_for('static',filename='js/theme.js')}}"></script>
+    <script src="{{url_for('static',filename='js/main.js')}}"></script>
+</body>
+</html>
